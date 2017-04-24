@@ -13,7 +13,7 @@
             </f:facet>
         </h:head>
 
-        <h:body style="background-color: green " onload="#{Edificios.mostrarEdificios()}">
+        <h:body style="background-color: green " onload="#{EdificiosBean.mostrarEdificios()}">
 
             <p:layout fullPage="true">
 
@@ -56,7 +56,7 @@
                                      rowsPerPageTemplate="5,10,15">
 
                             <p:column headerText="Id Edificio">
-                                <h:outputText value="#{edificio.edificioID}" />
+                                <h:outputText value="#{edificio.edificioId}" />
                             </p:column>
                             <p:column headerText="Nombre Edificio">
                                 <h:outputText value="#{edificio.nombreEdificio}" />
