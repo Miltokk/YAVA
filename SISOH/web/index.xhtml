@@ -1,14 +1,91 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-    </h:body>
-</html>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Edificios</title>
+            </f:facet>
+        </h:head>
+
+        <h:body style="background-color: green " onload="#{Edificios.mostrarEdificios()}">
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true" style="background-color: green">
+                    <p:graphicImage url="/img/titulo.png" style="padding-left: 12%" ></p:graphicImage>
+                    <p:graphicImage url="/img/UABC.PNG" style="width: 52px; padding-left: 12%"></p:graphicImage>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="40" closable="true" collapsible="true" style="background-color: green">
+                    © Missa Saldaña, Erick Vanegas, Yerelin Gonzalez, Angel Lechuga
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="400" header="Agregar Edificio" collapsible="true" style="background-color: green">
+                    <h:form id="insertar">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Id Edificio"/>
+                            <p:inputText value="#{EdificioBean.edificio.edificioId}" disabled="true"/>
+                            <p:outputLabel value="Nombre Edificio"/>
+                            <p:inputText value="#{EdificioBean.edificio.nombreEdificio}" />
+                            <p:outputLabel value="Numero de plantas"/>
+                            <p:inputText value="#{EdificioBean.edificio.plantas}" />
+                            <p:outputLabel value="Id Unidad Academica"/>
+                            <p:inputText value="#{EdificioBean.edificio.UACid}" />
+                        </p:panelGrid>
+
+                        <p:commandButton actionListener="#{EdificioBean.addEdificio()}" value="Ingresar Edificio" update="insertar"/>
+
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form id="mostar">
+
+                        <p:dataTable var="profesor" value="#{EdificioBean.edificios}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
+                                     {PreviousPageLink} {PageLinks} 
+                                     {NextPageLink} {LastPageLink} 
+                                     {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15">
+
+                            <p:column headerText="Id Edificio">
+                                <h:outputText value="#{edificio.edificioID}" />
+                            </p:column>
+                            <p:column headerText="Nombre Edificio">
+                                <h:outputText value="#{edificio.nombreEdificio}" />
+                            </p:column>
+
+                            <p:column headerText="Numero de plantas">
+                                <h:outputText value="#{edificio.plantas}" />
+                            </p:column>
+
+                            <p:column headerText="Id Unidad Academica">
+                                <h:outputText value="#{edificio.UACid}" />
+                            </p:column>
+
+                            <p:column headerText="Modificar">
+                                <p:commandButton value="Modificar" oncomplete="dlgM.show()" update="formModificar">
+                                    <f:setPropertyActionListener target="#{EdificioBean.edificio}" value="#{edificio}" />
+                                </p:commandButton>
+                            </p:column>
+
+                            <p:column headerText="Eliminar">
+                                <p:commandButton value="Eliminar" oncomplete="dlgE.show()">
+                                    <f:setPropertyActionListener target="#{EdificioBean.edificio}" value="#{edificio}" />
+                                </p:commandButton>
+
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>
