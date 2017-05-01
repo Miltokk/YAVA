@@ -6,6 +6,7 @@
 package Servicios;
 
 import Logica.FacadeEdificio;
+import Logica.FacadeSalones;
 
 /**
  *
@@ -14,6 +15,7 @@ import Logica.FacadeEdificio;
 public class ServiceFacadeLocator {
     
     private static FacadeEdificio facadeEdificio;
+    private static FacadeSalones facadeSalon;
     
     public static FacadeEdificio getFacadeEdificio(){
     
@@ -22,5 +24,11 @@ public class ServiceFacadeLocator {
         
         return facadeEdificio;
     
+    }
+    
+    public static FacadeSalones getFacadeSalones(){
+        if(facadeSalon==null)
+            facadeSalon=new FacadeSalones();
+        return facadeSalon;
     }
 }

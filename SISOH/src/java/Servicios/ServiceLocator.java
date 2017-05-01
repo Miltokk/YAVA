@@ -6,21 +6,31 @@
 package Servicios;
 
 import DAO.EdificiosDAO;
+import DAO.SalonesDAO;
 
 /**
  *
  * @author Miltokk
  */
 public class ServiceLocator {
-    
+
     private static EdificiosDAO ConexionDAO;
-     
-      public static EdificiosDAO getInstanceEdificioDAO(){
-        
-        if ( ConexionDAO == null )
+    private static SalonesDAO salonDAO;
+
+    public static EdificiosDAO getInstanceEdificioDAO() {
+
+        if (ConexionDAO == null) {
             ConexionDAO = new EdificiosDAO();
-        
+        }
+
         return ConexionDAO;
     }
-     
+
+    public static SalonesDAO getInstanceSalonesDAO() {
+        if (salonDAO == null) {
+            salonDAO = new SalonesDAO();
+        }
+        return salonDAO;
+    }
+
 }
